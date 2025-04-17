@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Basic Auth</title>
+</head>
+<body>
+  <h1>Basic Auth</h1>
+  <input id="user" placeholder="User" />
+  <input id="pass" placeholder="password" type="password" />
+  <button onclick="login()">Enter</button>
+
+  <pre id="result"></pre>
+
+  <script>
+    async function login() {
+      const user = document.getElementById("user").value;
+      const pass = document.getElementById("pass").value;
+      const base64 = btoa(`${user}:${pass}`);
+
+      const res = await fetch("http://localhost:3000/resource-protected-by-basic-auth", {
+        headers: {
+          Authorization: `Basic ${base64}`,
+        },
+      });
+
+      const text = await res.text();
+      document.getElementById("result").innerText = `Status: ${res.status}\n${text}`;
+    }
+  </script>
+</body>
+</html>
