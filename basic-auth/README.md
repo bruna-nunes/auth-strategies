@@ -39,3 +39,21 @@ Quando se utiliza HTTPS (HTTP sobre TLS), a comunicação é criptografada: mesm
 
 O header Authorization ainda é enviado, mas criptografado na transmissão.
 
+## ⚙️ Como executar esse exemplo
+
+- Clone este repositório
+-  Clone o arquivo `env.example` para um arquivo `.env`
+- Preencha o user e password com o que desejar.
+<br>
+
+- Acesse a pasta `basic-auth/backend` e execute:
+  - `npm install` para instalar as dependências necessárias (express, cors, doteenv)
+  - `npm run dev` para inicializar o backend
+<br>
+
+- Abra o arquivo `index.html` em um navegador de sua escolha (o projeto é bem simples!)
+- Use as credenciais que preencheu no `.env` para ter acesso a rota autenticada, via `Basic Authentication`
+- Use credenciais incorretas para visualizar a proteção via `Basic Authentication` funcionando e retornando um erro
+
+
+> ✋ O projeto é bem simples e a título de simplificação e estudos, o frontend foi feito somente com HTML puro, sem necessidade de frameworks.
