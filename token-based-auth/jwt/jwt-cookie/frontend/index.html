@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>JWT Auth - Cookie Http Only</title>
+</head>
+<body>
+  <h2>Login</h2>
+  <input type="text" id="email" placeholder="Email" />
+  <input type="password" id="password" placeholder="Password" />
+  <button onclick="login()">Enter</button>
+
+  <h2>Protected resource</h2>
+  <button onclick="accessProtectedResource()">Access</button>
+
+  <h2>Logout</h2>
+  <button onclick="logout()">Sair</button>
+
+  <p id="response"></p>
+
+
+  <script>
+    async function login() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      const res = await fetch('http://localhost:3000/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ email, password })
+      });
+
+      const data = await res.text();
+      document.getElementById('response').textContent = data
+    }
+
+    async function accessProtectedResource() {
+      const res = await fetch('http://localhost:3000/resource-protected-by-jwt-auth-cookie', {
+        method: 'GET',
+        credentials: 'include'
+      });
+
+      const data = await res.text();
+      document.getElementById('response').textContent = data;
+    }
+
+    async function logout() {
+      const res = await fetch('http://localhost:3000/logout', {
+        method: 'POST',
+        credentials: 'include'
+      });
+
+      const data = await res.text();
+      document.getElementById('response').textContent = data;
+    }
+  </script>
+</body>
+</html>
